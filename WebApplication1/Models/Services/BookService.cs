@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using WebApplication1.Models.Contracts;
 using WebApplication1.Models.Entities;
+using WebApplication1.Models.Repositories;
 
 namespace WebApplication1.Models.Services
 {
@@ -8,7 +10,9 @@ namespace WebApplication1.Models.Services
     {
         public List<Book> GetAll()
         {
-            throw new System.NotImplementedException();
+            var books = ContextDataFake.books;
+
+            return books.OrderBy(b => b.Title).ToList();
         }
     }
 }
