@@ -6,11 +6,13 @@
         public string Title { get; set; }
         public string Author { get; set; }
 
+        public Book() { }
+
         public Book(int id, string title, string author)
         {
-            Id = id;
-            Title = title;
-            Author = author;
+            this.Id = id;
+            this.Title = title;
+            this.Author = author;
         }
     }
 }

@@ -5,6 +5,10 @@ namespace WebApplication1.Models.Contracts
 {
     public interface IBookService
     {
-        public List<Book> GetAll();
+        // C
+        void AddBook(Book book);
+
+        // R
+        List<Book> GetAll();
     }
 }

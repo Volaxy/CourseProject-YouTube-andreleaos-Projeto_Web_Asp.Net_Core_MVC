@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using WebApplication1.Models.Contracts;
+using WebApplication1.Models.Entities;
 using WebApplication1.Models.Services;
 
 namespace WebApplication1.Controllers
@@ -16,6 +17,21 @@ namespace WebApplication1.Controllers
         public IActionResult List()
         {
             return View(bookService.GetAll());
+        }
+
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+        // The "HttpPost" informs which this method only is called when for example, the submit button of a form is clicked
+        [HttpPost]
+        public IActionResult Create(Book book)
+        {
+            bookService.AddBook(book);
+
+            // The "RedirectToAction" call the method with the name passed by parameter
+            return RedirectToAction("List");
         }
     }
 }

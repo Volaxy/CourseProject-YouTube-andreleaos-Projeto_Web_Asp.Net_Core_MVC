@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using WebApplication1.Models.Entities;
 
-namespace WebApplication1.Models.Repositories
+namespace WebApplication1.Models.Db
 {
     public static class ContextDataFake
     {
