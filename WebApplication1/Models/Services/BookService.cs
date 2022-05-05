@@ -15,11 +15,25 @@ namespace WebApplication1.Models.Services
         }
 
         // R
+        public Book FindById(int id)
+        {
+            return ContextDataFake.books.FirstOrDefault(book => book.Id == id);
+        }
+
         public List<Book> GetAll()
         {
             var books = ContextDataFake.books;
 
             return books.OrderBy(b => b.Title).ToList();
+        }
+
+        // U
+        public void UpdateBook(Book book)
+        {
+            var old_book = FindById(book.Id);
+
+            old_book.Title = book.Title;
+            old_book.Author = book.Author;
         }
     }
 }

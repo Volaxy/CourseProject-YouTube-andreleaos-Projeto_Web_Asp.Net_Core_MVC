@@ -33,5 +33,25 @@ namespace WebApplication1.Controllers
             // The "RedirectToAction" call the method with the name passed by parameter
             return RedirectToAction("List");
         }
+
+        public IActionResult Edit(int id)
+        {
+            if(string.IsNullOrEmpty(id.ToString()))
+                return NotFound();
+
+            var book = bookService.FindById(id);
+            if(book == null)
+                return NotFound();
+
+            return View(book);
+        }
+
+        [HttpPost]
+        public IActionResult Edit(Book book)
+        {
+            bookService.UpdateBook(book);
+
+            return RedirectToAction("List");
+        }
     }
 }

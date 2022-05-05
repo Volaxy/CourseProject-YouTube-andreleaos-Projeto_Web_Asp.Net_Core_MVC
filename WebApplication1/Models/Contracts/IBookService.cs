@@ -9,6 +9,11 @@ namespace WebApplication1.Models.Contracts
         void AddBook(Book book);
 
         // R
+        Book FindById(int id);
+
         List<Book> GetAll();
+
+        // U
+        void UpdateBook(Book book);
     }
 }
