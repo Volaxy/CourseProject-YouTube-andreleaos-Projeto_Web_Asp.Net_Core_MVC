@@ -6,14 +6,17 @@ namespace WebApplication1.Models.Contracts
     public interface IBookService
     {
         // C
-        void AddBook(Book book);
+        void Add(Book book);
 
         // R
         Book FindById(int id);
 
-        List<Book> GetAll();
+        List<Book> FindAll();
 
         // U
-        void UpdateBook(Book book);
+        void Update(Book book);
+
+        // D
+        void DeleteById(int id);
     }
 }

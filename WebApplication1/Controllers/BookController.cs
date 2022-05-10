@@ -16,7 +16,7 @@ namespace WebApplication1.Controllers
 
         public IActionResult List()
         {
-            return View(bookService.GetAll());
+            return View(bookService.FindAll());
         }
 
         public IActionResult Create()
@@ -24,34 +24,57 @@ namespace WebApplication1.Controllers
             return View();
         }
 
-        // The "HttpPost" informs which this method only is called when for example, the submit button of a form is clicked
         [HttpPost]
         public IActionResult Create(Book book)
         {
-            bookService.AddBook(book);
+            bookService.Add(book);
 
-            // The "RedirectToAction" call the method with the name passed by parameter
             return RedirectToAction("List");
         }
 
         public IActionResult Edit(int id)
         {
-            if(string.IsNullOrEmpty(id.ToString()))
+            if (isInvalid(id))
                 return NotFound();
 
-            var book = bookService.FindById(id);
-            if(book == null)
-                return NotFound();
-
-            return View(book);
+            return View(bookService.FindById(id));
         }
 
         [HttpPost]
         public IActionResult Edit(Book book)
         {
-            bookService.UpdateBook(book);
+            bookService.Update(book);
 
             return RedirectToAction("List");
         }
+
+        public IActionResult Details(int id)
+        {
+            var book = bookService.FindById(id);
+
+            return View(book);
+        }
+
+        public IActionResult Delete(int id)
+        {
+            if (isInvalid(id))
+                return NotFound();
+
+            return View(bookService.FindById(id));
+        }
+
+        [HttpPost]
+        public IActionResult Delete(Book book)
+        {
+            bookService.DeleteById(book.Id);
+
+            return RedirectToAction("List");
+        }
+
+        private bool isInvalid(int id)
+            {
+                return string.IsNullOrEmpty(id.ToString())
+                    || bookService.FindById(id) == null;
+            }
     }
 }

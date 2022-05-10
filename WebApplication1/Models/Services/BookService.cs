@@ -9,7 +9,7 @@ namespace WebApplication1.Models.Services
     public class BookService : IBookService
     {
         // C
-        public void AddBook(Book book)
+        public void Add(Book book)
         {
             ContextDataFake.books.Add(book);
         }
@@ -20,7 +20,7 @@ namespace WebApplication1.Models.Services
             return ContextDataFake.books.FirstOrDefault(book => book.Id == id);
         }
 
-        public List<Book> GetAll()
+        public List<Book> FindAll()
         {
             var books = ContextDataFake.books;
 
@@ -28,12 +28,19 @@ namespace WebApplication1.Models.Services
         }
 
         // U
-        public void UpdateBook(Book book)
+        public void Update(Book book)
         {
             var old_book = FindById(book.Id);
 
             old_book.Title = book.Title;
             old_book.Author = book.Author;
+        }
+
+        // D
+        public void DeleteById(int id)
+        {
+            var book = FindById(id);
+            ContextDataFake.books.Remove(book);
         }
     }
 }
